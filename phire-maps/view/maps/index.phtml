@@ -1,0 +1,44 @@
+<?php include $phireHeader; ?>
+    <h1 class="maps-header"><?=$title; ?></h1>
+<?php if (count($maps) > 0): ?>
+<?php if (null !== $pages): ?>
+    <div class="page-links"><?=$pages; ?></div>
+<?php endif; ?>
+<?php if ($acl->isAllowed($user->role, 'maps', 'add')): ?>
+    <nav id="sub-nav">
+        <nav><a href="<?=$phireUri . '/maps/add'; ?>">+ Add</a></nav>
+    </nav>
+<?php endif; ?>
+<?php if ($acl->isAllowed($user->role, 'maps', 'remove')): ?>
+    <form id="maps-form" action="<?=$phireUri . '/maps/remove'; ?>" method="post">
+<?php endif; ?>
+        <table class="data-table" cellpadding="0" cellspacing="0" border="0">
+            <tr>
+                <th><a href="<?=$phireUri . '/maps?sort=id';?>">#</a></th>
+                <th><a href="<?=$phireUri . '/maps?sort=name';?>">Name</a></th>
+                <th class="text-center"><?php if ($acl->isAllowed($user->role, 'maps', 'edit')): ?>Edit<?php else: ?>&nbsp;<?php endif; ?></th>
+                <th class="text-center"><?php if ($acl->isAllowed($user->role, 'maps', 'remove')): ?><input type="checkbox" name="checkall" id="checkall" value="rm_maps" /><?php else: ?>&nbsp;<?php endif; ?></th>
+            </tr>
+<?php $i = 1; ?>
+<?php foreach ($maps as $field): ?>
+            <tr>
+                <td><?=$field->id; ?></td>
+                <td><?=$field->name; ?></td>
+                <td><?php if ($acl->isAllowed($user->role, 'maps', 'edit')): ?><a class="edit-link" href="<?=$phireUri . '/maps/edit/' . $field->id; ?>">Edit</a><?php else: ?>&nbsp;<?php endif; ?></td>
+                <td class="text-center"><?php if ($acl->isAllowed($user->role, 'maps', 'remove')): ?><input type="checkbox" name="rm_maps[]" id="rm_maps<?=$i++; ?>" value="<?=$field->id; ?>" /><?php else: ?>&nbsp;<?php endif; ?></td>
+            </tr>
+<?php endforeach; ?>
+        </table>
+<?php if ($acl->isAllowed($user->role, 'maps', 'remove')): ?>
+        <div id="form-footer"><input type="submit" name="submit" class="process-btn" value="Remove" /></div>
+    </form>
+<?php endif; ?>
+<?php else: ?>
+<?php if ($acl->isAllowed($user->role, 'maps', 'add')): ?>
+    <nav id="sub-nav">
+        <nav><a href="<?=$phireUri . '/maps/add'; ?>">+ Add</a></nav>
+    </nav>
+<?php endif; ?>
+    <p>There are currently no maps.</p>
+<?php endif; ?>
+<?php include $phireFooter; ?>

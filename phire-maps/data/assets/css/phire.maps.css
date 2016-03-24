@@ -1,0 +1,58 @@
+/**
+ * Maps Module Style Sheet for Phire CMS 2
+ */
+
+#map-form {
+    margin: 10px auto 10px auto;
+    padding: 15px 0 15px 0;
+    width: 100%;
+    border-top: solid 1px #ccc;
+}
+
+#map-form > dl:first-child {
+    margin: 0 0 0 20px;
+    padding: 0 0 0 20px;
+    width: 160px;
+    border-left: solid 1px #ccc;
+    float: right;
+    min-height: 300px;
+    height: 100%;
+}
+
+#map-form > dl:first-child > dd, #map-form > dl:first-child > dt {
+    width: 100%;
+}
+
+#map-form > dl:first-child > dt {
+    margin: 0 0 5px 0;
+    border-bottom: dotted 1px #aaa;
+}
+
+#map-form-field-group-2 {
+    margin: 0;
+    padding: 0;
+    clear: left;
+    width: calc(100% - 220px);
+}
+
+#map-form-field-group-2 > dd {
+    padding: 4px
+}
+
+#map-form-field-group-2 > dt, #map-form-field-group-2 > dd {
+    width: 98%;
+}
+
+.maps-nav-icon {
+    background-image: url(../img/maps-icon-sm.png);
+    background-position: 8px center;
+    background-repeat: no-repeat;
+}
+
+.maps-header {
+    margin: 10px 0 10px 0;
+    padding: 10px 0 10px 40px;
+    background-image: url(../img/maps-icon-lg.png);
+    background-position: left center;
+    background-repeat: no-repeat;
+}

@@ -1,0 +1,10 @@
+<?php include $phireHeader; ?>
+    <h1 class="maps-header"><?=$title; ?></h1>
+    <nav id="sub-nav">
+<?php if ($acl->isAllowed($user->role, 'maps', 'add')): ?>
+        <nav><a href="<?=$phireUri . '/maps/add'; ?>">+ Add</a></nav>
+<?php endif; ?>
+        <nav><a href="<?=$phireUri . '/maps'; ?>">Back</a></nav>
+    </nav>
+<?=$form; ?>
+<?php include $phireFooter; ?>
