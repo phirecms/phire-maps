@@ -13,7 +13,7 @@ return [
         'resources'  => include 'resources.php',
         'forms'      => include 'forms.php',
         'nav.phire'  => [
-            'fields' => [
+            'maps' => [
                 'name' => 'Maps',
                 'href' => '/maps',
                 'acl' => [
