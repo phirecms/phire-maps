@@ -60,8 +60,12 @@ class MapLocation extends AbstractModel
     public function save(array $fields)
     {
         $map = new Table\MapLocations([
-            'map_id' => $fields['map_id']
-            'title'  => $fields['title']
+            'map_id'    => $fields['map_id'],
+            'title'     => $fields['title'],
+            'uri'       => (!empty($fields['uri']) ? $fields['uri'] : null),
+            'info'      => (!empty($fields['info']) ? $fields['info'] : null),
+            'longitude' => $fields['longitude'],
+            'latitude'  => $fields['latitude']
         ]);
         $map->save();
 
@@ -76,10 +80,14 @@ class MapLocation extends AbstractModel
      */
     public function update(array $fields)
     {
-        $map = Table\MapLocations::findById($maps['id']);
+        $map = Table\MapLocations::findById($fields['id']);
         if (isset($map->id)) {
-            $map->map_id = $fields['map_id'];
-            $map->title  = $fields['title'];
+            $map->map_id    = $fields['map_id'];
+            $map->title     = $fields['title'];
+            $map->uri       = (!empty($fields['uri']) ? $fields['uri'] : null);
+            $map->info      = (!empty($fields['info']) ? $fields['info'] : null);
+            $map->longitude = $fields['longitude'];
+            $map->latitude  = $fields['latitude'];
             $map->save();
 
             $this->data = array_merge($this->data, $map->getColumns());

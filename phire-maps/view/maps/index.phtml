@@ -16,6 +16,7 @@
             <tr>
                 <th><a href="<?=$phireUri . '/maps?sort=id';?>">#</a></th>
                 <th><a href="<?=$phireUri . '/maps?sort=name';?>">Name</a></th>
+                <th>Locations</th>
                 <th class="text-center"><?php if ($acl->isAllowed($user->role, 'maps', 'edit')): ?>Edit<?php else: ?>&nbsp;<?php endif; ?></th>
                 <th class="text-center"><?php if ($acl->isAllowed($user->role, 'maps', 'remove')): ?><input type="checkbox" name="checkall" id="checkall" value="rm_maps" /><?php else: ?>&nbsp;<?php endif; ?></th>
             </tr>
@@ -24,6 +25,7 @@
             <tr>
                 <td><?=$map->id; ?></td>
                 <td><?=$map->name; ?></td>
+                <td><?=$map->num_of_locations; ?><?php if ($acl->isAllowed($user->role, 'map-locations', 'index')): ?> [ <a class="normal-link" href="<?=$phireUri . '/maps/locations/' . $map->id; ?>">Manage</a> ]</a><?php endif; ?></td>
                 <td><?php if ($acl->isAllowed($user->role, 'maps', 'edit')): ?><a class="edit-link" href="<?=$phireUri . '/maps/edit/' . $map->id; ?>">Edit</a><?php else: ?>&nbsp;<?php endif; ?></td>
                 <td class="text-center"><?php if ($acl->isAllowed($user->role, 'maps', 'remove')): ?><input type="checkbox" name="rm_maps[]" id="rm_maps<?=$i++; ?>" value="<?=$map->id; ?>" /><?php else: ?>&nbsp;<?php endif; ?></td>
             </tr>

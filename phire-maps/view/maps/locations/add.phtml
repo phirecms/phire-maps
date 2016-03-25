@@ -4,7 +4,7 @@
 <?php if ($acl->isAllowed($user->role, 'map-locations', 'add')): ?>
         <nav><a href="<?=$phireUri . '/maps/locations/add/' . $mid; ?>">+ Add</a></nav>
 <?php endif; ?>
-        <nav><a href="<?=$phireUri . '/maps'; ?>">Back</a></nav>
+        <nav><a href="<?=$phireUri . '/maps/locations/' . $mid; ?>">Back</a></nav>
     </nav>
 <?=$form; ?>
 <?php include $phireFooter; ?>

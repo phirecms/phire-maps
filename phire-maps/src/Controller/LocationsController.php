@@ -60,12 +60,11 @@ class LocationsController extends AbstractController
         $this->view->mid   = $mid;
 
         $fields = $this->application->config()['forms']['Phire\Maps\Form\MapLocation'];
-
+        $fields[0]['map_id']['value'] = $mid;
         $this->view->form = new Form\MapLocation($fields);
 
         if ($this->request->isPost()) {
-            $this->view->form->addFilter('strip_tags')
-                 ->addFilter('htmlentities', [ENT_QUOTES, 'UTF-8'])
+            $this->view->form->addFilter('htmlentities', [ENT_QUOTES, 'UTF-8'])
                  ->setFieldValues($this->request->getPost());
 
             if ($this->view->form->isValid()) {
@@ -76,7 +75,7 @@ class LocationsController extends AbstractController
                 $location->save($this->view->form->getFields());
                 $this->view->id = $location->id;
                 $this->sess->setRequestValue('saved', true);
-                $this->redirect(BASE_PATH . APP_URI . '/maps/locations/edit/' . $mid);
+                $this->redirect(BASE_PATH . APP_URI . '/maps/locations/edit/' . $mid . '/' . $location->id);
             }
         }
 
@@ -103,17 +102,17 @@ class LocationsController extends AbstractController
         $location->getById($id);
 
         $fields = $this->application->config()['forms']['Phire\Maps\Form\MapLocation'];
-        $fields[1]['name']['attributes']['onkeyup'] = 'phire.changeTitle(this.value);';
+        $fields[0]['map_id']['value'] = $mid;
+        $fields[1]['title']['attributes']['onkeyup'] = 'phire.changeTitle(this.value);';
 
-        $this->view->location_name = $location->name;
+        $this->view->location_name = $location->title;
 
         $this->view->form = new Form\MapLocation($fields);
         $this->view->form->addFilter('htmlentities', [ENT_QUOTES, 'UTF-8'])
-             ->setFieldValues($map->toArray());
+             ->setFieldValues($location->toArray());
 
         if ($this->request->isPost()) {
-            $this->view->form->addFilter('strip_tags')
-                 ->setFieldValues($this->request->getPost());
+            $this->view->form->setFieldValues($this->request->getPost());
 
             if ($this->view->form->isValid()) {
                 $this->view->form->clearFilters()
@@ -123,7 +122,7 @@ class LocationsController extends AbstractController
                 $location->update($this->view->form->getFields());
                 $this->view->id = $location->id;
                 $this->sess->setRequestValue('saved', true);
-                $this->redirect(BASE_PATH . APP_URI . '/maps/edit/' . $mid);
+                $this->redirect(BASE_PATH . APP_URI . '/maps/locations/edit/' . $mid . '/' . $location->id);
             }
         }
 

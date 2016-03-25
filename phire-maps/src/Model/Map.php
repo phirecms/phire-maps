@@ -25,16 +25,22 @@ class Map extends AbstractModel
             $page = ((null !== $page) && ((int)$page > 1)) ?
                 ($page * $limit) - $limit : null;
 
-            return Table\Maps::findAll([
+            $rows = Table\Maps::findAll([
                 'offset' => $page,
                 'limit'  => $limit,
                 'order'  => $order
             ])->rows();
         } else {
-            return Table\Maps::findAll([
+            $rows = Table\Maps::findAll([
                 'order'  => $order
             ])->rows();
         }
+
+        foreach ($rows as $i => $row) {
+            $rows[$i]->num_of_locations = Table\MapLocations::findBy(['map_id' => $row->id])->count();
+        }
+
+        return $rows;
     }
 
     /**
@@ -60,7 +66,12 @@ class Map extends AbstractModel
     public function save(array $fields)
     {
         $map = new Table\Maps([
-            'name' => $fields['name']
+            'name'      => $fields['name'],
+            'longitude' => $fields['longitude'],
+            'latitude'  => $fields['latitude'],
+            'pin_icon'  => (!empty($fields['pin_icon']) ? $fields['pin_icon'] : null),
+            'zoom'      => (!empty($fields['zoom']) ? (int)$fields['zoom'] : 7),
+            'satellite' => (!empty($fields['satellite']) ? (int)$fields['satellite'] : 0)
         ]);
         $map->save();
 
@@ -78,6 +89,11 @@ class Map extends AbstractModel
         $map = Table\Maps::findById($fields['id']);
         if (isset($map->id)) {
             $map->name = $fields['name'];
+            $map->longitude = $fields['longitude'];
+            $map->latitude  = $fields['latitude'];
+            $map->pin_icon  = (!empty($fields['pin_icon']) ? $fields['pin_icon'] : null);
+            $map->zoom      = (!empty($fields['zoom']) ? (int)$fields['zoom'] : 7);
+            $map->satellite = (!empty($fields['satellite']) ? (int)$fields['satellite'] : 0);
             $map->save();
 
             $this->data = array_merge($this->data, $map->getColumns());

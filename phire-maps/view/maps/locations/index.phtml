@@ -4,11 +4,12 @@
 <?php if (null !== $pages): ?>
     <div class="page-links"><?=$pages; ?></div>
 <?php endif; ?>
-<?php if ($acl->isAllowed($user->role, 'map-locations', 'add')): ?>
     <nav id="sub-nav">
+<?php if ($acl->isAllowed($user->role, 'map-locations', 'add')): ?>
         <nav><a href="<?=$phireUri . '/maps/locations/add/' . $mid; ?>">+ Add</a></nav>
-    </nav>
 <?php endif; ?>
+        <nav><a href="<?=$phireUri . '/maps'; ?>">Back</a></nav>
+    </nav>
 <?php if ($acl->isAllowed($user->role, 'map-locations', 'remove')): ?>
     <form id="maps-form" action="<?=$phireUri . '/maps/locations/remove' . $mid; ?>" method="post">
 <?php endif; ?>
@@ -24,7 +25,7 @@
             <tr>
                 <td><?=$location->id; ?></td>
                 <td><?=$location->title; ?></td>
-                <td><?php if ($acl->isAllowed($user->role, 'map-locations', 'edit')): ?><a class="edit-link" href="<?=$phireUri . '/maps/locations/edit/' . $mid . $location->id; ?>">Edit</a><?php else: ?>&nbsp;<?php endif; ?></td>
+                <td><?php if ($acl->isAllowed($user->role, 'map-locations', 'edit')): ?><a class="edit-link" href="<?=$phireUri . '/maps/locations/edit/' . $mid . '/' . $location->id; ?>">Edit</a><?php else: ?>&nbsp;<?php endif; ?></td>
                 <td class="text-center"><?php if ($acl->isAllowed($user->role, 'map-locations', 'remove')): ?><input type="checkbox" name="rm_map_locations[]" id="rm_map_locations<?=$i++; ?>" value="<?=$location->id; ?>" /><?php else: ?>&nbsp;<?php endif; ?></td>
             </tr>
 <?php endforeach; ?>
@@ -34,11 +35,12 @@
     </form>
 <?php endif; ?>
 <?php else: ?>
-<?php if ($acl->isAllowed($user->role, 'map-locations', 'add')): ?>
     <nav id="sub-nav">
+<?php if ($acl->isAllowed($user->role, 'map-locations', 'add')): ?>
         <nav><a href="<?=$phireUri . '/maps/locations/add/' . $mid; ?>">+ Add</a></nav>
-    </nav>
 <?php endif; ?>
-    <p>There are currently no maps.</p>
+        <nav><a href="<?=$phireUri . '/maps'; ?>">Back</a></nav>
+    </nav>
+    <p>There are currently no map locations.</p>
 <?php endif; ?>
 <?php include $phireFooter; ?>

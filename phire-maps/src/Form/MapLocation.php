@@ -16,12 +16,12 @@ class MapLocation extends Form
      * @param  array  $fields
      * @param  string $action
      * @param  string $method
-     * @return Map
+     * @return MapLocation
      */
     public function __construct(array $fields = null, $action = null, $method = 'post')
     {
         parent::__construct($fields, $action, $method);
-        $this->setAttribute('id', 'map-location-form');
+        $this->setAttribute('id', 'map-form');
         $this->setIndent('    ');
     }
 
