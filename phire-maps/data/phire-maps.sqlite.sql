@@ -20,11 +20,11 @@ PRAGMA foreign_keys = ON;
 CREATE TABLE IF NOT EXISTS "[{prefix}]maps" (
   "id" integer NOT NULL PRIMARY KEY AUTOINCREMENT,
   "name" varchar NOT NULL,
-  "longitude" varchar,
   "latitude" varchar,
+  "longitude" varchar,
   "pin_icon" varchar,
   "zoom" integer,
-  "satellite" integer,
+  "map_type" varchar,
   UNIQUE ("id")
 ) ;
 
@@ -42,8 +42,9 @@ CREATE TABLE IF NOT EXISTS "[{prefix}]map_locations" (
   "title" varchar NOT NULL,
   "uri" varchar,
   "info" text,
-  "longitude" varchar,
   "latitude" varchar,
+  "longitude" varchar,
+  "new_window" integer,
   UNIQUE ("id")
 ) ;
 

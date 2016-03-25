@@ -4,7 +4,7 @@ namespace Phire\Maps\Model;
 
 use Phire\Maps\Table;
 use Phire\Model\AbstractModel;
-use Pop\File\Dir;
+use Pop\View\View;
 
 class Map extends AbstractModel
 {
@@ -53,7 +53,28 @@ class Map extends AbstractModel
     {
         $map = Table\Maps::findById($id);
         if (isset($map->id)) {
-            $this->data  = array_merge($this->data, $map->getColumns());
+            $this->data = array_merge($this->data, $map->getColumns());
+        }
+    }
+
+    /**
+     * Get map with locations
+     *
+     * @param  int $id
+     * @return string
+     */
+    public function getMap($id)
+    {
+        $map = Table\Maps::findById($id);
+        if (isset($map->id)) {
+            $mapData = $map->getColumns();
+            $mapData['map_id']    = 'map-' . $id;
+            $mapData['map_class'] = 'phire-map-div';
+            $mapData['locations'] = Table\MapLocations::findBy(['map_id' => $id])->rows();
+            $view = new View(__DIR__ . '/../../view/maps-public/map.phtml', $mapData);
+            return $view->render();
+        } else {
+            return '';
         }
     }
 
@@ -67,11 +88,11 @@ class Map extends AbstractModel
     {
         $map = new Table\Maps([
             'name'      => $fields['name'],
-            'longitude' => $fields['longitude'],
             'latitude'  => $fields['latitude'],
+            'longitude' => $fields['longitude'],
             'pin_icon'  => (!empty($fields['pin_icon']) ? $fields['pin_icon'] : null),
-            'zoom'      => (!empty($fields['zoom']) ? (int)$fields['zoom'] : 7),
-            'satellite' => (!empty($fields['satellite']) ? (int)$fields['satellite'] : 0)
+            'zoom'      => (!empty($fields['zoom']) ? (int)$fields['zoom'] : 10),
+            'map_type'  => $fields['map_type']
         ]);
         $map->save();
 
@@ -89,11 +110,11 @@ class Map extends AbstractModel
         $map = Table\Maps::findById($fields['id']);
         if (isset($map->id)) {
             $map->name = $fields['name'];
-            $map->longitude = $fields['longitude'];
             $map->latitude  = $fields['latitude'];
+            $map->longitude = $fields['longitude'];
             $map->pin_icon  = (!empty($fields['pin_icon']) ? $fields['pin_icon'] : null);
-            $map->zoom      = (!empty($fields['zoom']) ? (int)$fields['zoom'] : 7);
-            $map->satellite = (!empty($fields['satellite']) ? (int)$fields['satellite'] : 0);
+            $map->zoom      = (!empty($fields['zoom']) ? (int)$fields['zoom'] : 10);
+            $map->map_type  = $fields['map_type'];
             $map->save();
 
             $this->data = array_merge($this->data, $map->getColumns());

@@ -14,11 +14,11 @@ DROP TABLE IF EXISTS "[{prefix}]maps" CASCADE;
 CREATE TABLE IF NOT EXISTS "[{prefix}]maps" (
   "id" integer NOT NULL DEFAULT nextval('map_id_seq'),
   "name" varchar(255) NOT NULL,
-  "longitude" varchar(255),
   "latitude" varchar(255),
+  "longitude" varchar(255),
   "pin_icon" varchar(255),
   "zoom" integer,
-  "satellite" integer,
+  "map_type" varchar(255),
   PRIMARY KEY ("id")
 ) ;
 
@@ -39,8 +39,9 @@ CREATE TABLE IF NOT EXISTS "[{prefix}]map_locations" (
   "title" varchar(255) NOT NULL,
   "uri" varchar(255),
   "info" text,
-  "longitude" varchar(255),
   "latitude" varchar(255),
+  "longitude" varchar(255),
+  "new_window" integer,
   PRIMARY KEY ("id"),
   CONSTRAINT "fk_map_location" FOREIGN KEY ("map_id") REFERENCES "[{prefix}]maps" ("id") ON DELETE SET NULL ON UPDATE CASCADE
 ) ;

@@ -45,9 +45,9 @@ class MapLocation extends AbstractModel
      */
     public function getById($id)
     {
-        $map = Table\MapLocations::findById($id);
-        if (isset($map->id)) {
-            $this->data  = array_merge($this->data, $map->getColumns());
+        $location = Table\MapLocations::findById($id);
+        if (isset($location->id)) {
+            $this->data  = array_merge($this->data, $location->getColumns());
         }
     }
 
@@ -59,17 +59,18 @@ class MapLocation extends AbstractModel
      */
     public function save(array $fields)
     {
-        $map = new Table\MapLocations([
-            'map_id'    => $fields['map_id'],
-            'title'     => $fields['title'],
-            'uri'       => (!empty($fields['uri']) ? $fields['uri'] : null),
-            'info'      => (!empty($fields['info']) ? $fields['info'] : null),
-            'longitude' => $fields['longitude'],
-            'latitude'  => $fields['latitude']
+        $location = new Table\MapLocations([
+            'map_id'     => $fields['map_id'],
+            'title'      => $fields['title'],
+            'uri'        => (!empty($fields['uri']) ? $fields['uri'] : null),
+            'info'       => (!empty($fields['info']) ? $fields['info'] : null),
+            'latitude'   => $fields['latitude'],
+            'longitude'  => $fields['longitude'],
+            'new_window' => (!empty($fields['new_window']) ? (int)$fields['new_window'] : 0),
         ]);
-        $map->save();
+        $location->save();
 
-        $this->data = array_merge($this->data, $map->getColumns());
+        $this->data = array_merge($this->data, $location->getColumns());
     }
 
     /**
@@ -80,17 +81,19 @@ class MapLocation extends AbstractModel
      */
     public function update(array $fields)
     {
-        $map = Table\MapLocations::findById($fields['id']);
-        if (isset($map->id)) {
-            $map->map_id    = $fields['map_id'];
-            $map->title     = $fields['title'];
-            $map->uri       = (!empty($fields['uri']) ? $fields['uri'] : null);
-            $map->info      = (!empty($fields['info']) ? $fields['info'] : null);
-            $map->longitude = $fields['longitude'];
-            $map->latitude  = $fields['latitude'];
-            $map->save();
+        $location = Table\MapLocations::findById($fields['id']);
+        if (isset($location->id)) {
+            $location->map_id     = $fields['map_id'];
+            $location->title      = $fields['title'];
+            $location->uri        = (!empty($fields['uri']) ? $fields['uri'] : null);
+            $location->info       = (!empty($fields['info']) ? $fields['info'] : null);
+            $location->latitude   = $fields['latitude'];
+            $location->longitude  = $fields['longitude'];
+            $location->longitude  = $fields['longitude'];
+            $location->new_window = (!empty($fields['new_window']) ? (int)$fields['new_window'] : 0);
+            $location->save();
 
-            $this->data = array_merge($this->data, $map->getColumns());
+            $this->data = array_merge($this->data, $location->getColumns());
         }
     }
 
@@ -104,9 +107,9 @@ class MapLocation extends AbstractModel
     {
         if (isset($fields['rm_map_locations'])) {
             foreach ($fields['rm_map_locations'] as $id) {
-                $map = Table\MapLocations::findById((int)$id);
-                if (isset($map->id)) {
-                    $map->delete();
+                $location = Table\MapLocations::findById((int)$id);
+                if (isset($location->id)) {
+                    $location->delete();
                 }
             }
         }

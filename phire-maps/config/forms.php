@@ -10,14 +10,15 @@ return [
                     'class'  => 'save-btn wide'
                 ]
             ],
-            'satellite' => [
-                'type'  => 'radio',
-                'label' => 'Use Satellite?',
+            'map_type' => [
+                'type'  => 'select',
+                'label' => 'Map Type',
                 'value' => [
-                    '1' => 'Yes',
-                    '0' => 'No'
-                ],
-                'marked' => 0
+                    'ROADMAP'   => 'Road Map',
+                    'SATELLITE' => 'Satellite',
+                    'HYBRID'    => 'Hybrid',
+                    'TERRAIN'   => 'Terrain'
+                ]
             ],
             'zoom' => [
                 'type'       => 'text',
@@ -26,7 +27,7 @@ return [
                     'size'  => 3,
                     'class' => 'order-field'
                 ],
-                'value'      => 7
+                'value'      => 10
             ],
             'id' => [
                 'type'  => 'hidden',
@@ -43,18 +44,18 @@ return [
                     'style' => 'width: 98%'
                 ]
             ],
-            'longitude' => [
+            'latitude' => [
                 'type'       => 'text',
-                'label'      => 'Longitude',
+                'label'      => 'Latitude',
                 'required'   => true,
                 'attributes' => [
                     'size'  => 60,
                     'style' => 'width: 98%'
                 ]
             ],
-            'latitude' => [
+            'longitude' => [
                 'type'       => 'text',
-                'label'      => 'Latitude',
+                'label'      => 'Longitude',
                 'required'   => true,
                 'attributes' => [
                     'size'  => 60,
@@ -80,6 +81,15 @@ return [
                     'class'  => 'save-btn wide'
                 ]
             ],
+            'new_window' => [
+                'type'  => 'radio',
+                'label' => 'New Window?',
+                'value' => [
+                    '1' => 'Yes',
+                    '0' => 'No'
+                ],
+                'marked' => 0
+            ],
             'map_id' => [
                 'type'  => 'hidden',
                 'value' => 0
@@ -99,18 +109,18 @@ return [
                     'style' => 'width: 98%'
                 ]
             ],
-            'longitude' => [
+            'latitude' => [
                 'type'       => 'text',
-                'label'      => 'Longitude',
+                'label'      => 'Latitude',
                 'required'   => true,
                 'attributes' => [
                     'size'  => 60,
                     'style' => 'width: 98%'
                 ]
             ],
-            'latitude' => [
+            'longitude' => [
                 'type'       => 'text',
-                'label'      => 'Latitude',
+                'label'      => 'Longitude',
                 'required'   => true,
                 'attributes' => [
                     'size'  => 60,
@@ -129,7 +139,7 @@ return [
                 'type'       => 'textarea',
                 'label'      => 'Info',
                 'attributes' => [
-                    'rows'  => 10,
+                    'rows'  => 8,
                     'cols'  => 80,
                     'style' => 'width: 98.5%'
                 ]
