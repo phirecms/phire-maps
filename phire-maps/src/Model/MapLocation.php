@@ -6,11 +6,11 @@ use Phire\Maps\Table;
 use Phire\Model\AbstractModel;
 use Pop\File\Dir;
 
-class Map extends AbstractModel
+class MapLocation extends AbstractModel
 {
 
     /**
-     * Get all maps
+     * Get all map locations
      *
      * @param  int    $limit
      * @param  int    $page
@@ -25,42 +25,43 @@ class Map extends AbstractModel
             $page = ((null !== $page) && ((int)$page > 1)) ?
                 ($page * $limit) - $limit : null;
 
-            return Table\Maps::findAll([
+            return Table\MapLocations::findAll([
                 'offset' => $page,
                 'limit'  => $limit,
                 'order'  => $order
             ])->rows();
         } else {
-            return Table\Maps::findAll([
+            return Table\MapLocations::findAll([
                 'order'  => $order
             ])->rows();
         }
     }
 
     /**
-     * Get map by ID
+     * Get map location by ID
      *
      * @param  int $id
      * @return void
      */
     public function getById($id)
     {
-        $map = Table\Maps::findById($id);
+        $map = Table\MapLocations::findById($id);
         if (isset($map->id)) {
             $this->data  = array_merge($this->data, $map->getColumns());
         }
     }
 
     /**
-     * Save new map
+     * Save new map location
      *
      * @param  array $fields
      * @return void
      */
     public function save(array $fields)
     {
-        $map = new Table\Maps([
-            'name' => $fields['name']
+        $map = new Table\MapLocations([
+            'map_id' => $fields['map_id']
+            'title'  => $fields['title']
         ]);
         $map->save();
 
@@ -68,16 +69,17 @@ class Map extends AbstractModel
     }
 
     /**
-     * Update an existing map
+     * Update an existing map location
      *
      * @param  array $fields
      * @return void
      */
     public function update(array $fields)
     {
-        $map = Table\Maps::findById($fields['id']);
+        $map = Table\MapLocations::findById($maps['id']);
         if (isset($map->id)) {
-            $map->name = $fields['name'];
+            $map->map_id = $fields['map_id'];
+            $map->title  = $fields['title'];
             $map->save();
 
             $this->data = array_merge($this->data, $map->getColumns());
@@ -85,16 +87,16 @@ class Map extends AbstractModel
     }
 
     /**
-     * Remove a map
+     * Remove a map location
      *
      * @param  array $fields
      * @return void
      */
     public function remove(array $fields)
     {
-        if (isset($fields['rm_maps'])) {
-            foreach ($fields['rm_maps'] as $id) {
-                $map = Table\Maps::findById((int)$id);
+        if (isset($fields['rm_map_locations'])) {
+            foreach ($fields['rm_map_locations'] as $id) {
+                $map = Table\MapLocations::findById((int)$id);
                 if (isset($map->id)) {
                     $map->delete();
                 }
@@ -110,7 +112,7 @@ class Map extends AbstractModel
      */
     public function hasPages($limit)
     {
-        return (Table\Maps::findAll()->count() > $limit);
+        return (Table\MapLocations::findAll()->count() > $limit);
     }
 
     /**
@@ -120,7 +122,7 @@ class Map extends AbstractModel
      */
     public function getCount()
     {
-        return Table\Maps::findAll()->count();
+        return Table\MapLocations::findAll()->count();
     }
 
 }

@@ -6,5 +6,11 @@ return [
         'add',
         'edit',
         'remove'
+    ],
+    'map-locations' => [
+        'index',
+        'add',
+        'edit',
+        'remove'
     ]
 ];

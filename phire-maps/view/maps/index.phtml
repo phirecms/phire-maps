@@ -20,12 +20,12 @@
                 <th class="text-center"><?php if ($acl->isAllowed($user->role, 'maps', 'remove')): ?><input type="checkbox" name="checkall" id="checkall" value="rm_maps" /><?php else: ?>&nbsp;<?php endif; ?></th>
             </tr>
 <?php $i = 1; ?>
-<?php foreach ($maps as $field): ?>
+<?php foreach ($maps as $map): ?>
             <tr>
-                <td><?=$field->id; ?></td>
-                <td><?=$field->name; ?></td>
-                <td><?php if ($acl->isAllowed($user->role, 'maps', 'edit')): ?><a class="edit-link" href="<?=$phireUri . '/maps/edit/' . $field->id; ?>">Edit</a><?php else: ?>&nbsp;<?php endif; ?></td>
-                <td class="text-center"><?php if ($acl->isAllowed($user->role, 'maps', 'remove')): ?><input type="checkbox" name="rm_maps[]" id="rm_maps<?=$i++; ?>" value="<?=$field->id; ?>" /><?php else: ?>&nbsp;<?php endif; ?></td>
+                <td><?=$map->id; ?></td>
+                <td><?=$map->name; ?></td>
+                <td><?php if ($acl->isAllowed($user->role, 'maps', 'edit')): ?><a class="edit-link" href="<?=$phireUri . '/maps/edit/' . $map->id; ?>">Edit</a><?php else: ?>&nbsp;<?php endif; ?></td>
+                <td class="text-center"><?php if ($acl->isAllowed($user->role, 'maps', 'remove')): ?><input type="checkbox" name="rm_maps[]" id="rm_maps<?=$i++; ?>" value="<?=$map->id; ?>" /><?php else: ?>&nbsp;<?php endif; ?></td>
             </tr>
 <?php endforeach; ?>
         </table>

@@ -8,31 +8,36 @@ use Phire\Maps\Table;
 use Phire\Controller\AbstractController;
 use Pop\Paginator\Paginator;
 
-class IndexController extends AbstractController
+class LocationsController extends AbstractController
 {
 
     /**
      * Index action method
      *
+     * @param  int $mid
      * @return void
      */
-    public function index()
+    public function index($mid)
     {
         $map = new Model\Map();
+        $map->getById($mid);
 
-        if ($map->hasPages($this->config->pagination)) {
+        $location = new Model\MapLocation();
+
+        if ($location->hasPages($this->config->pagination)) {
             $limit = $this->config->pagination;
-            $pages = new Paginator($map->getCount(), $limit);
+            $pages = new Paginator($location->getCount(), $limit);
             $pages->useInput(true);
         } else {
             $limit = null;
             $pages = null;
         }
 
-        $this->prepareView('maps/index.phtml');
-        $this->view->title  = 'Maps';
+        $this->prepareView('maps/locations/index.phtml');
+        $this->view->title  = 'Maps : ' . $map->name . ' : Locations';
         $this->view->pages  = $pages;
-        $this->view->maps = $map->getAll(
+        $this->view->mid    = $mid;
+        $this->view->locations = $location->getAll(
             $limit, $this->request->getQuery('page'), $this->request->getQuery('sort')
         );
 
@@ -42,16 +47,21 @@ class IndexController extends AbstractController
     /**
      * Add action method
      *
+     * @param  int $mid
      * @return void
      */
-    public function add()
+    public function add($mid)
     {
-        $this->prepareView('maps/add.phtml');
-        $this->view->title = 'Maps : Add';
+        $map = new Model\Map();
+        $map->getById($mid);
 
-        $fields = $this->application->config()['forms']['Phire\Maps\Form\Map'];
+        $this->prepareView('maps/locations/add.phtml');
+        $this->view->title = 'Maps : ' . $map->name . ' : Locations : Add';
+        $this->view->mid   = $mid;
 
-        $this->view->form = new Form\Map($fields);
+        $fields = $this->application->config()['forms']['Phire\Maps\Form\MapLocation'];
+
+        $this->view->form = new Form\MapLocation($fields);
 
         if ($this->request->isPost()) {
             $this->view->form->addFilter('strip_tags')
@@ -62,11 +72,11 @@ class IndexController extends AbstractController
                 $this->view->form->clearFilters()
                      ->addFilter('html_entity_decode', [ENT_QUOTES, 'UTF-8'])
                      ->filter();
-                $map = new Model\Map();
-                $map->save($this->view->form->getFields());
-                $this->view->id = $map->id;
+                $location = new Model\MapLocation();
+                $location->save($this->view->form->getFields());
+                $this->view->id = $location->id;
                 $this->sess->setRequestValue('saved', true);
-                $this->redirect(BASE_PATH . APP_URI . '/maps/edit/' . $map->id);
+                $this->redirect(BASE_PATH . APP_URI . '/maps/locations/edit/' . $mid);
             }
         }
 
@@ -76,23 +86,28 @@ class IndexController extends AbstractController
     /**
      * Edit action method
      *
+     * @param  int $mid
      * @param  int $id
      * @return void
      */
-    public function edit($id)
+    public function edit($mid, $id)
     {
-        $this->prepareView('maps/edit.phtml');
-        $this->view->title = 'Maps : Edit';
-
         $map = new Model\Map();
-        $map->getById($id);
+        $map->getById($mid);
 
-        $fields = $this->application->config()['forms']['Phire\Maps\Form\Map'];
+        $this->prepareView('maps/locations/edit.phtml');
+        $this->view->title = 'Maps : ' . $map->name;
+        $this->view->mid   = $mid;
+
+        $location = new Model\MapLocation();
+        $location->getById($id);
+
+        $fields = $this->application->config()['forms']['Phire\Maps\Form\MapLocation'];
         $fields[1]['name']['attributes']['onkeyup'] = 'phire.changeTitle(this.value);';
 
-        $this->view->map_name = $map->name;
+        $this->view->location_name = $location->name;
 
-        $this->view->form = new Form\Map($fields);
+        $this->view->form = new Form\MapLocation($fields);
         $this->view->form->addFilter('htmlentities', [ENT_QUOTES, 'UTF-8'])
              ->setFieldValues($map->toArray());
 
@@ -104,11 +119,11 @@ class IndexController extends AbstractController
                 $this->view->form->clearFilters()
                      ->addFilter('html_entity_decode', [ENT_QUOTES, 'UTF-8'])
                      ->filter();
-                $map = new Model\Map();
-                $map->update($this->view->form->getFields());
-                $this->view->id = $map->id;
+                $location = new Model\MapLocation();
+                $location->update($this->view->form->getFields());
+                $this->view->id = $location->id;
                 $this->sess->setRequestValue('saved', true);
-                $this->redirect(BASE_PATH . APP_URI . '/maps/edit/' . $map->id);
+                $this->redirect(BASE_PATH . APP_URI . '/maps/edit/' . $mid);
             }
         }
 
@@ -118,16 +133,17 @@ class IndexController extends AbstractController
     /**
      * Remove action method
      *
+     * @param  int $mid
      * @return void
      */
-    public function remove()
+    public function remove($mid)
     {
         if ($this->request->isPost()) {
-            $map = new Model\Map();
+            $map = new Model\MapLocation();
             $map->remove($this->request->getPost());
         }
         $this->sess->setRequestValue('removed', true);
-        $this->redirect(BASE_PATH . APP_URI . '/maps');
+        $this->redirect(BASE_PATH . APP_URI . '/maps/locations/' . $mid);
     }
 
     /**

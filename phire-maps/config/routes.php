@@ -33,6 +33,38 @@ return [
                 'resource'   => 'maps',
                 'permission' => 'remove'
             ]
+        ],
+        '/maps/locations/:mid' => [
+            'controller' => 'Phire\Maps\Controller\LocationsController',
+            'action'     => 'index',
+            'acl'        => [
+                'resource'   => 'map-locations',
+                'permission' => 'index'
+            ]
+        ],
+        '/maps/locations/add/:mid' => [
+            'controller' => 'Phire\Maps\Controller\LocationsController',
+            'action'     => 'add',
+            'acl'        => [
+                'resource'   => 'map-locations',
+                'permission' => 'add'
+            ]
+        ],
+        '/maps/locations/edit/:mid/:id' => [
+            'controller' => 'Phire\Maps\Controller\LocationsController',
+            'action'     => 'edit',
+            'acl'        => [
+                'resource'   => 'map-locations',
+                'permission' => 'edit'
+            ]
+        ],
+        '/maps/locations/remove/:mid' => [
+            'controller' => 'Phire\Maps\Controller\LocationsController',
+            'action'     => 'remove',
+            'acl'        => [
+                'resource'   => 'map-locations',
+                'permission' => 'remove'
+            ]
         ]
     ]
 ];
