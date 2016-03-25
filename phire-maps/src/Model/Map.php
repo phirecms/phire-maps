@@ -68,7 +68,7 @@ class Map extends AbstractModel
         $map = Table\Maps::findById($id);
         if (isset($map->id)) {
             $mapData = $map->getColumns();
-            $mapData['map_id']    = 'map-' . $id;
+            $mapData['map_id']    = 'phire-map-' . $id;
             $mapData['map_class'] = 'phire-map-div';
             $mapData['locations'] = Table\MapLocations::findBy(['map_id' => $id])->rows();
             $view = new View(__DIR__ . '/../../view/maps-public/map.phtml', $mapData);

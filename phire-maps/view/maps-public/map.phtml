@@ -3,8 +3,8 @@
 <script type="text/javascript">
     var locations = [
 <?php foreach ($locations as $i => $location):
-    $title = (!empty($location['uri'])) ? '<a href="' . $location['uri'] . '"' . (($location['new_window']) ? ' target="_blank"' : '') . '>' . $location['title'] . '</a>' : $location['title'];
-    $info  = str_replace(["\n", "\r"], ['', ''], $location['info']);
+    $title = '<h4 class="phire-map-location-title">' . ((!empty($location['uri'])) ? '<a href="' . $location['uri'] . '"' . (($location['new_window']) ? ' target="_blank"' : '') . '>' . addslashes($location['title']) . '</a>' : $location['title']) . '</h4>';
+    $info  = '<p class="phire-map-location-info">' . str_replace(["\n", "\r"], ['', ''], addslashes(nl2br($location['info']))) . '</p>';
 ?>
         ['<?=$title; ?><br /><?=$info; ?>', <?=$location['latitude']; ?>, <?=$location['longitude']; ?>, <?=($i + 1); ?>],
 <?php endforeach; ?>
