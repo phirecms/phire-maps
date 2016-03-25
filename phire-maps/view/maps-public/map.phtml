@@ -6,7 +6,7 @@
     $title = '<h4 class="phire-map-location-title">' . ((!empty($location['uri'])) ? '<a href="' . $location['uri'] . '"' . (($location['new_window']) ? ' target="_blank"' : '') . '>' . addslashes($location['title']) . '</a>' : $location['title']) . '</h4>';
     $info  = '<p class="phire-map-location-info">' . str_replace(["\n", "\r"], ['', ''], addslashes(nl2br($location['info']))) . '</p>';
 ?>
-        ['<?=$title; ?><br /><?=$info; ?>', <?=$location['latitude']; ?>, <?=$location['longitude']; ?>, <?=($i + 1); ?>],
+        ['<?=$title; ?><?=$info; ?>', <?=$location['latitude']; ?>, <?=$location['longitude']; ?>, <?=($i + 1); ?>],
 <?php endforeach; ?>
     ];
     var map = new google.maps.Map(document.getElementById('<?=$map_id; ?>'), {
