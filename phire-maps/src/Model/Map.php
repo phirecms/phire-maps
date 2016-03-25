@@ -91,6 +91,7 @@ class Map extends AbstractModel
             'latitude'  => $fields['latitude'],
             'longitude' => $fields['longitude'],
             'pin_icon'  => (!empty($fields['pin_icon']) ? $fields['pin_icon'] : null),
+            'styles'    => (!empty($fields['styles']) ? $fields['styles'] : null),
             'zoom'      => (!empty($fields['zoom']) ? (int)$fields['zoom'] : 10),
             'map_type'  => $fields['map_type']
         ]);
@@ -113,6 +114,7 @@ class Map extends AbstractModel
             $map->latitude  = $fields['latitude'];
             $map->longitude = $fields['longitude'];
             $map->pin_icon  = (!empty($fields['pin_icon']) ? $fields['pin_icon'] : null);
+            $map->styles    = (!empty($fields['styles']) ? $fields['styles'] : null);
             $map->zoom      = (!empty($fields['zoom']) ? (int)$fields['zoom'] : 10);
             $map->map_type  = $fields['map_type'];
             $map->save();

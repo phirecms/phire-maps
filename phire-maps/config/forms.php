@@ -69,6 +69,15 @@ return [
                     'size'  => 60,
                     'style' => 'width: 98%'
                 ]
+            ],
+            'styles' => [
+                'type'       => 'textarea',
+                'label'      => 'Styles',
+                'attributes' => [
+                    'rows'  => 20,
+                    'cols'  => 80,
+                    'style' => 'width: 98.5%'
+                ]
             ]
         ]
     ],
@@ -143,7 +152,7 @@ return [
                     'cols'  => 80,
                     'style' => 'width: 98.5%'
                 ]
-            ],
+            ]
         ]
     ]
 ];

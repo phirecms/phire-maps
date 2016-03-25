@@ -16,6 +16,7 @@ CREATE TABLE IF NOT EXISTS `[{prefix}]maps` (
   `latitude` varchar(255),
   `longitude` varchar(255),
   `pin_icon` varchar(255),
+  `styles` text,
   `zoom` int(16),
   `map_type` varchar(255),
   PRIMARY KEY (`id`)

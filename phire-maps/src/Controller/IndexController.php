@@ -54,8 +54,7 @@ class IndexController extends AbstractController
         $this->view->form = new Form\Map($fields);
 
         if ($this->request->isPost()) {
-            $this->view->form->addFilter('strip_tags')
-                 ->addFilter('htmlentities', [ENT_QUOTES, 'UTF-8'])
+            $this->view->form->addFilter('htmlentities', [ENT_QUOTES, 'UTF-8'])
                  ->setFieldValues($this->request->getPost());
 
             if ($this->view->form->isValid()) {
@@ -97,8 +96,7 @@ class IndexController extends AbstractController
              ->setFieldValues($map->toArray());
 
         if ($this->request->isPost()) {
-            $this->view->form->addFilter('strip_tags')
-                 ->setFieldValues($this->request->getPost());
+            $this->view->form->setFieldValues($this->request->getPost());
 
             if ($this->view->form->isValid()) {
                 $this->view->form->clearFilters()
