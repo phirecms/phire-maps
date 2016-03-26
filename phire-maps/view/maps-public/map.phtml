@@ -28,7 +28,7 @@
             position : new google.maps.LatLng(locations[i][1], locations[i][2]),
             map      : map,
 <?php if (!empty($pin_icon)): ?>
-            icon: '<?=BASE_PATH . $pin_icon; ?>'
+            icon: '<?=((substr($pin_icon, 0, 1) == '/') ? BASE_PATH . $pin_icon : $pin_icon); ?>'
 <?php endif; ?>
         });
 
