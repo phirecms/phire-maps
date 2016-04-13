@@ -93,6 +93,7 @@ class Map extends AbstractModel
             'pin_icon'  => (!empty($fields['pin_icon']) ? $fields['pin_icon'] : null),
             'styles'    => (!empty($fields['styles']) ? $fields['styles'] : null),
             'zoom'      => (!empty($fields['zoom']) ? (int)$fields['zoom'] : 10),
+            'scroll'    => (!empty($fields['scroll']) ? (int)$fields['scroll'] : 0),
             'map_type'  => $fields['map_type']
         ]);
         $map->save();
@@ -116,6 +117,7 @@ class Map extends AbstractModel
             $map->pin_icon  = (!empty($fields['pin_icon']) ? $fields['pin_icon'] : null);
             $map->styles    = (!empty($fields['styles']) ? $fields['styles'] : null);
             $map->zoom      = (!empty($fields['zoom']) ? (int)$fields['zoom'] : 10);
+            $map->scroll    = (!empty($fields['scroll']) ? (int)$fields['scroll'] : 0);
             $map->map_type  = $fields['map_type'];
             $map->save();
 

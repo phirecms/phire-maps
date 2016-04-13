@@ -18,6 +18,7 @@ CREATE TABLE IF NOT EXISTS `[{prefix}]maps` (
   `pin_icon` varchar(255),
   `styles` text,
   `zoom` int(16),
+  `scroll` int(1),
   `map_type` varchar(255),
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 AUTO_INCREMENT=15001 ;

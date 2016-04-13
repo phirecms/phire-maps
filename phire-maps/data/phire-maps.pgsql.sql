@@ -19,6 +19,7 @@ CREATE TABLE IF NOT EXISTS "[{prefix}]maps" (
   "pin_icon" varchar(255),
   "styles" text,
   "zoom" integer,
+  "scroll" integer,
   "map_type" varchar(255),
   PRIMARY KEY ("id")
 ) ;

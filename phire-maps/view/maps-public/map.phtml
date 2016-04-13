@@ -14,7 +14,9 @@
         center    : new google.maps.LatLng(<?=$latitude; ?>, <?=$longitude; ?>),
         mapTypeId : google.maps.MapTypeId.<?=$map_type . PHP_EOL; ?>
     });
-
+<?php if (isset($scroll)): ?>
+    map.setOptions({scrollwheel: <?=(($scroll) ? 'true' : 'false'); ?>});
+<?php endif; ?>
 <?php if (!empty($styles)): ?>
     map.setOptions({styles: [
 <?=$styles; ?>

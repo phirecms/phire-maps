@@ -29,6 +29,15 @@ return [
                 ],
                 'value'      => 10
             ],
+            'scroll' => [
+                'type'  => 'radio',
+                'label' => 'Scroll',
+                'value' => [
+                    '1' => 'Yes',
+                    '0' => 'No'
+                ],
+                'marked' => 0
+            ],
             'id' => [
                 'type'  => 'hidden',
                 'value' => 0
