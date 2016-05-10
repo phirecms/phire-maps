@@ -38,7 +38,7 @@ class LocationsController extends AbstractController
         $this->view->pages  = $pages;
         $this->view->mid    = $mid;
         $this->view->locations = $location->getAll(
-            $limit, $this->request->getQuery('page'), $this->request->getQuery('sort')
+            $mid, $limit, $this->request->getQuery('page'), $this->request->getQuery('sort')
         );
 
         $this->send();

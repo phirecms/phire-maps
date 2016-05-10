@@ -12,12 +12,13 @@ class MapLocation extends AbstractModel
     /**
      * Get all map locations
      *
+     * @param  int    $mid
      * @param  int    $limit
      * @param  int    $page
      * @param  string $sort
      * @return array
      */
-    public function getAll($limit = null, $page = null, $sort = null)
+    public function getAll($mid, $limit = null, $page = null, $sort = null)
     {
         $order = $this->getSortOrder($sort, $page);
 
@@ -25,13 +26,13 @@ class MapLocation extends AbstractModel
             $page = ((null !== $page) && ((int)$page > 1)) ?
                 ($page * $limit) - $limit : null;
 
-            return Table\MapLocations::findAll([
+            return Table\MapLocations::findBy(['map_id' => $mid], [
                 'offset' => $page,
                 'limit'  => $limit,
                 'order'  => $order
             ])->rows();
         } else {
-            return Table\MapLocations::findAll([
+            return Table\MapLocations::findBy(['map_id' => $mid], [
                 'order'  => $order
             ])->rows();
         }
