@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * phire-maps form configuration
+ */
 return [
     'Phire\Maps\Form\Map' => [
         [

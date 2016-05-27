@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * phire-maps resources
+ */
 return [
     'maps' => [
         'index',

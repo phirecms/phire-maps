@@ -1,5 +1,7 @@
 <?php
-
+/**
+ * phire-maps routes
+ */
 return [
     APP_URI => [
         '/maps[/]' => [

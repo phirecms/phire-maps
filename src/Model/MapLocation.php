@@ -1,11 +1,32 @@
 <?php
+/**
+ * Phire Maps Module
+ *
+ * @link       https://github.com/phirecms/phire-maps
+ * @author     Nick Sagona, III <dev@nolainteractive.com>
+ * @copyright  Copyright (c) 2009-2016 NOLA Interactive, LLC. (http://www.nolainteractive.com)
+ * @license    http://www.phirecms.org/license     New BSD License
+ */
 
+/**
+ * @namespace
+ */
 namespace Phire\Maps\Model;
 
 use Phire\Maps\Table;
 use Phire\Model\AbstractModel;
 use Pop\File\Dir;
 
+/**
+ * Map Location Model class
+ *
+ * @category   Phire\Maps
+ * @package    Phire\Maps
+ * @author     Nick Sagona, III <dev@nolainteractive.com>
+ * @copyright  Copyright (c) 2009-2016 NOLA Interactive, LLC. (http://www.nolainteractive.com)
+ * @license    http://www.phirecms.org/license     New BSD License
+ * @version    1.0.0
+ */
 class MapLocation extends AbstractModel
 {
 

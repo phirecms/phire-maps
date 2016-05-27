@@ -1,11 +1,32 @@
 <?php
+/**
+ * Phire Maps Module
+ *
+ * @link       https://github.com/phirecms/phire-maps
+ * @author     Nick Sagona, III <dev@nolainteractive.com>
+ * @copyright  Copyright (c) 2009-2016 NOLA Interactive, LLC. (http://www.nolainteractive.com)
+ * @license    http://www.phirecms.org/license     New BSD License
+ */
 
+/**
+ * @namespace
+ */
 namespace Phire\Maps\Event;
 
 use Phire\Maps\Model;
 use Phire\Controller\AbstractController;
 use Pop\Application;
 
+/**
+ * Maps Event class
+ *
+ * @category   Phire\Maps
+ * @package    Phire\Maps
+ * @author     Nick Sagona, III <dev@nolainteractive.com>
+ * @copyright  Copyright (c) 2009-2016 NOLA Interactive, LLC. (http://www.nolainteractive.com)
+ * @license    http://www.phirecms.org/license     New BSD License
+ * @version    1.0.0
+ */
 class Maps
 {
 
